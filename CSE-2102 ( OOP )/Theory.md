@@ -180,12 +180,12 @@ class Child : public Parent {};
 Occurs in multiple inheritance when a derived class inherits from two classes that both inherit from the same base.
 
 Solution: Virtual Inheritance
-
+```cpp
 class A { public: int x; };
 class B : virtual public A {};
 class C : virtual public A {};
 class D : public B, public C {};  // only one copy of A
-
+```
 🧱 11️⃣ Abstract Class & Virtual Function
 
 Abstract Class: Cannot create an object. Contains at least one pure virtual function.
