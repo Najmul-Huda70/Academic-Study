@@ -154,28 +154,245 @@ void show(Box b) {
 ```
 # 🧬 🔟 Inheritance & Classification
 
-Inheritance allows a class (child) to use the properties and functions of another class (parent).
+## 🧩 What is Inheritance?
 
-Types of Inheritance:
+Inheritance means a class can use properties and methods of another class.
+It helps in code reuse and follows the “is-a” relationship.
 
-Single
+For example:
+👉 A Student is a Person.
+So Student can inherit from Person.
 
-Multiple
+### 🧱 1️⃣ Single Inheritance
 
-Multilevel
-
-Hierarchical
-
-Hybrid
-
-Example (Single):
+➡️ Only one base class and one derived class.
 ```cpp
-class Parent {
-public: void display() { cout << "Parent"; }
+#include <iostream>
+using namespace std;
+
+class Person {
+public:
+    void display() {
+        cout << "I am a person." << endl;
+    }
 };
-class Child : public Parent {};
+
+class Student : public Person {
+public:
+    void study() {
+        cout << "I am a student." << endl;
+    }
+};
+
+int main() {
+    Student s;
+    s.display(); // from Person
+    s.study();   // from Student
+}
 ```
-🪞 Diamond Problem
+#### 🧠 Output:
+```css
+I am a person.
+I am a student.
+```
+
+✅ One base → one derived.
+
+### 🧱 2️⃣ Multiple Inheritance
+
+➡️ One derived class inherits from more than one base class.
+```cpp
+#include <iostream>
+using namespace std;
+
+class Teacher {
+public:
+    void teach() {
+        cout << "I teach students." << endl;
+    }
+};
+
+class Researcher {
+public:
+    void research() {
+        cout << "I do research." << endl;
+    }
+};
+
+class Professor : public Teacher, public Researcher {
+public:
+    void guide() {
+        cout << "I guide students in research." << endl;
+    }
+};
+
+int main() {
+    Professor p;
+    p.teach();
+    p.research();
+    p.guide();
+}
+```
+#### 🧠 Output:
+```css
+I teach students.
+I do research.
+I guide students in research.
+```
+
+✅ One class inherits from multiple parents.
+
+### 🧱 3️⃣ Multilevel Inheritance
+
+➡️ Inheritance happens in a chain — like a family line.
+```cpp
+#include <iostream>
+using namespace std;
+
+class Animal {
+public:
+    void eat() {
+        cout << "Eating..." << endl;
+    }
+};
+
+class Mammal : public Animal {
+public:
+    void walk() {
+        cout << "Walking..." << endl;
+    }
+};
+
+class Dog : public Mammal {
+public:
+    void bark() {
+        cout << "Barking..." << endl;
+    }
+};
+
+int main() {
+    Dog d;
+    d.eat();
+    d.walk();
+    d.bark();
+}
+```
+#### 🧠 Output:
+```css
+Eating...
+Walking...
+Barking...
+```
+
+✅ Base → Intermediate → Derived
+(Animal → Mammal → Dog)
+
+### 🧱 4️⃣ Hierarchical Inheritance
+
+➡️ One base class is inherited by multiple derived classes.
+```cpp
+#include <iostream>
+using namespace std;
+
+class Shape {
+public:
+    void area() {
+        cout << "Calculating area..." << endl;
+    }
+};
+
+class Circle : public Shape {
+public:
+    void drawCircle() {
+        cout << "Drawing circle." << endl;
+    }
+};
+
+class Rectangle : public Shape {
+public:
+    void drawRectangle() {
+        cout << "Drawing rectangle." << endl;
+    }
+};
+
+int main() {
+    Circle c;
+    Rectangle r;
+    c.area();
+    c.drawCircle();
+    r.area();
+    r.drawRectangle();
+}
+```
+#### 🧠 Output:
+```css
+Calculating area...
+Drawing circle.
+Calculating area...
+Drawing rectangle.
+```
+
+✅ One parent → multiple children.
+
+### 🧱 5️⃣ Hybrid Inheritance
+
+➡️ Combination of two or more types of inheritance.
+Usually involves multiple and multilevel.
+```cpp
+#include <iostream>
+using namespace std;
+
+class A {
+public:
+    void showA() {
+        cout << "Class A" << endl;
+    }
+};
+
+class B : public A {
+public:
+    void showB() {
+        cout << "Class B" << endl;
+    }
+};
+
+class C {
+public:
+    void showC() {
+        cout << "Class C" << endl;
+    }
+};
+
+class D : public B, public C {
+public:
+    void showD() {
+        cout << "Class D" << endl;
+    }
+};
+
+int main() {
+    D obj;
+    obj.showA(); // from A (through B)
+    obj.showB(); // from B
+    obj.showC(); // from C
+    obj.showD(); // from D
+}
+```
+#### 🧠 Output:
+```css
+Class A
+Class B
+Class C
+Class D
+```
+
+✅ Here:
+
+A → B → D (Multilevel)
+
+C → D (Multiple)
+👉 That’s why it’s called Hybrid inheritance.
+## 🪞 Diamond Problem
 
 Occurs in multiple inheritance when a derived class inherits from two classes that both inherit from the same base.
 
@@ -186,7 +403,7 @@ class B : virtual public A {};
 class C : virtual public A {};
 class D : public B, public C {};  // only one copy of A
 ```
-🧱 11️⃣ Abstract Class & Virtual Function
+# 🧱 11️⃣ Abstract Class & Virtual Function
 
 Abstract Class: Cannot create an object. Contains at least one pure virtual function.
 
