@@ -392,6 +392,15 @@ A → B → D (Multilevel)
 
 C → D (Multiple)
 👉 That’s why it’s called Hybrid inheritance.
+
+| Type             | Structure     | Description                  |
+| ---------------- | ------------- | ---------------------------- |
+| **Single**       | A → B         | One parent, one child        |
+| **Multiple**     | A + B → C     | One child, multiple parents  |
+| **Multilevel**   | A → B → C     | Chain of inheritance         |
+| **Hierarchical** | A → (B, C, D) | One parent, many children    |
+| **Hybrid**       | Combination   | Mix of any two or more types |
+
 ## 🪞 Diamond Problem
 
 Occurs in multiple inheritance when a derived class inherits from two classes that both inherit from the same base.
